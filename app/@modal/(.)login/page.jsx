@@ -99,7 +99,7 @@ export default function Login() {
                     }
                     <p className='text-center text-sm  font-bold'> Don&apos;t have an account ? <span className='text-red-600 cursor-pointer' onClick={() => { handleClose("/auth/signup") }}>Register</span></p>
                 </form>
-            </div>
+            </div>  
         </section>
 
     )
