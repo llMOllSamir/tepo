@@ -18,7 +18,7 @@ export const getUserAddress = createAsyncThunk<AddressResponse>(
   "user/getUserAddress",
   async () => {
     const res = await axios.get<AddressResponse>(
-      "https://ecommerce.routemisr.com/api/v1/address"
+      "https://ecommerce.routemisr.com/api/v1/addresses"
     );
     return res.data;
   }
@@ -29,7 +29,7 @@ export const addUserAddress = createAsyncThunk<
   Omit<UserAddress, "_id">
 >("user/updateUserAddress", async (address) => {
   const res = await axios.post<AddressResponse>(
-    "https://ecommerce.routemisr.com/api/v1/address",
+    "https://ecommerce.routemisr.com/api/v1/addresses",
     address,
     {
       headers: {
@@ -44,7 +44,7 @@ export const removeAddress = createAsyncThunk<AddressResponse, string>(
   "user/removeAddress",
   async (id) => {
     const res = await axios.delete<AddressResponse>(
-      `https://ecommerce.routemisr.com/api/v1/address/${id}`,
+      `https://ecommerce.routemisr.com/api/v1/addresses/${id}`,
       {
         headers: {
           token: JSON.parse(localStorage.getItem("token") || ""),

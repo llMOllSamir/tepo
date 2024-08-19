@@ -8,7 +8,7 @@ export default function Wishlist() {
     const { isLoading, wishList } = useGetWishList()
 
     return (
-        <section className="grow flex flex-col gap-7 justify-center items-center ">
+        <section className="grow flex flex-col gap-7 justify-center items-center  select-none">
             {
                 isLoading ? <div className="flex mx-auto justify-center items-center text-red-600  mt-20 ">
                     <FaSpinner className='  animate-spin' size={"4rem"} />
