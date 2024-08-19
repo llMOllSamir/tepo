@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 import Link from "next/link";
 import styles from "./style.module.css";
 import { usePathname } from "next/navigation";
-import { useAppDispatch } from "@/app/hooks/storeHooks";
+import { useAppDispatch, useAppSelector } from "@/app/hooks/storeHooks";
 import { User } from "@/app/types/sliceTypes";
 import { getUserAddress, setUser } from "@/app/Redux/slices/userSlice";
 import { getCart } from "@/app/Redux/slices/cartSlice";
@@ -11,10 +11,12 @@ import { getCategories } from "@/app/Redux/slices/categoriesSlice";
 import Lang from "../lang/Lang";
 import Translator from "../Translator";
 import CategoryMenu from "../categories menu/CategoryMenu";
+import { getWishList } from "@/app/Redux/slices/WishListSlice";
 
 
 export default function NavBar() {
   const dispatch = useAppDispatch()
+  const { token } = useAppSelector(state => state.user)
 
   let links = [
     { en: "HOME", ar: "الرئيسيه", ref: "/" },
@@ -27,15 +29,25 @@ export default function NavBar() {
 
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (token) {
+    const userToken = localStorage.getItem("token");
+    if (userToken) {
       const user: User = JSON.parse(localStorage.getItem("user") || "") as User;
-      dispatch(setUser({ token, user }));
+      dispatch(setUser({ token: userToken, user }));
       dispatch(getUserAddress());
       dispatch(getCart());
     }
     dispatch(getCategories());
   }, [dispatch]);
+
+
+  useEffect(() => {
+    if (token) {
+      dispatch(getUserAddress());
+      dispatch(getCart());
+      dispatch(getWishList());
+    }
+  }, [token, dispatch])
+
 
   return (
     <nav

@@ -12,7 +12,11 @@ export type CartState = {
   };
   error: any;
 };
-
+//  wish list type
+export type WishListState = {
+  count: number;
+  wishList: string[];
+};
 // user type
 export type User = {
   name: string;

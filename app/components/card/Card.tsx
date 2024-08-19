@@ -5,6 +5,7 @@ import { FaStar } from "react-icons/fa6";
 import BtnCart from "../AddToCart";
 import { Product } from "@/app/types/productsTypes";
 import SwiperProvider from "./SwiperCardProvider";
+import AddToWishList from "../AddToWishList";
 
 
 type CardProps = React.ComponentProps<"div"> & {
@@ -46,8 +47,10 @@ export default function Card({ product }: CardProps) {
             ))}
           </div>
           <p className="font-semibold">{product.price} L.E</p>
-          <BtnCart product={product} className="capitalize w-full flex justify-center text-sm items-center bg-red-500  text-white hover:bg-red-700 ms-auto me-2 py-2 px-6 rounded-2xl " />
-        </div>
+          <div className="flex gap-3">
+            <BtnCart product={product} className="capitalize grow flex justify-center text-sm items-center bg-red-500  text-white hover:bg-red-700 ms-auto me-2 py-2 px-6 rounded-2xl " />
+            <AddToWishList productId={product._id} className="flex justify-center items-center " />
+          </div> </div>
       </div>
     </div>
   );

@@ -10,8 +10,9 @@ import { useAppSelector } from "@/app/hooks/storeHooks";
 import Dark from "../dark mood/Dark";
 
 export default function HeadIcons() {
-  let { numOfCartItems } = useAppSelector((state) => state.cart);
+  const { numOfCartItems } = useAppSelector((state) => state.cart);
   const { token } = useAppSelector(state => state.user)
+  const { count } = useAppSelector(state => state.WishList)
 
   const protectedIcons = useMemo(() => {
     if (!token) {
@@ -26,7 +27,7 @@ export default function HeadIcons() {
         element: FaRegHeart,
         title: { ar: "المفضله", en: "WISH LIST" },
         ref: "/wishlist",
-        counter: null,
+        counter: count,
       },
       {
         element: CiShoppingCart,
@@ -41,7 +42,7 @@ export default function HeadIcons() {
         counter: null,
       },]
     }
-  }, [numOfCartItems, token])
+  }, [numOfCartItems, token, count])
 
   let links = useMemo(() => {
     return [
@@ -59,7 +60,7 @@ export default function HeadIcons() {
     <>
       {links.map((link, index) => (
         <Link key={index} className={`relative`} href={link.ref}>
-          {link.counter !== null && (
+          {link.counter !== null && link.counter > 0 && (
             <span
               className={`absolute -top-2 -end-1 -translate-1/2 w-5  h-5 text-red-600  font-bold text-sm   rounded-full flex justify-center items-center bg-white `}
             >

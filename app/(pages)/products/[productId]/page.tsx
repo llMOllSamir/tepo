@@ -6,6 +6,7 @@ import Link from "next/link";
 import { Metadata } from "next";
 import { Product } from "@/app/types/productsTypes";
 import RecommendedProducts from "./RecommendedProducts";
+import AddToWishList from "@/app/components/AddToWishList";
 
 /**handle meta data description and title  */
 type ProductDetailsProps = {
@@ -69,12 +70,13 @@ export default async function ProductDetails({ params }: ProductDetailsProps) {
             {data.description}
           </p>
         </div>
-        <div className="py-5">
-          <BtnCart product={data} className="capitalize flex justify-center  text-sm items-center bg-red-500  text-white hover:bg-red-700 ms-auto me-2 py-2 px-6 rounded-2xl " />
+        <div className="py-5 flex justify-end gap-3">
+          <AddToWishList productId={data._id} />
+          <BtnCart product={data} className="capitalize flex justify-center  text-sm items-center bg-red-500  text-white hover:bg-red-700   py-2 px-6 rounded-2xl " />
         </div>
       </div>
       <div className="my-3 pt-3 border-t-2 border-gray-500 border-opacity-55 col-span-1 sm:col-span-3">
-        <h3 className="font-semibold text-lg px-5 my-3">
+        <h3 className="font-semibold text-xl px-5 my-5">
           Products related to this item
         </h3>
         <Suspense fallback={
