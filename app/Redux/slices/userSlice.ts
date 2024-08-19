@@ -18,7 +18,12 @@ export const getUserAddress = createAsyncThunk<AddressResponse>(
   "user/getUserAddress",
   async () => {
     const res = await axios.get<AddressResponse>(
-      "https://ecommerce.routemisr.com/api/v1/addresses"
+      "https://ecommerce.routemisr.com/api/v1/addresses",
+      {
+        headers: {
+          token: JSON.parse(localStorage.getItem("token") || ""),
+        },
+      }
     );
     return res.data;
   }
