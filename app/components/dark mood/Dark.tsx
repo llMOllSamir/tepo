@@ -13,10 +13,10 @@ export default function Dark() {
   /**Handle Dark Mood state */
   let handleDark = useCallback(() => {
     if (darkMood.current.checked) {
-      document.body.classList.add("dark");
+      document.documentElement.classList.add("dark");
       dispatch(setDarkState(true));
     } else {
-      document.body.classList.remove("dark");
+      document.documentElement.classList.remove("dark");
       dispatch(setDarkState(false));
     }
   }, [dispatch]);
@@ -26,7 +26,7 @@ export default function Dark() {
     dispatch(checkDarkState());
   }, [dispatch]);
 
-  /**  handl Dark state Change*/
+  /**  handle Dark state Change*/
   useEffect(() => {
     if (isDark) {
       darkMood.current.checked = true;

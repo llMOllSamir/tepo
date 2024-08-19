@@ -6,6 +6,7 @@ import { FaSpinner } from "react-icons/fa";
 import { Product } from "../types/productsTypes";
 import { addToCart } from "../Redux/slices/cartSlice";
 import { useAppDispatch, useAppSelector } from "../hooks/storeHooks";
+import Translator from "./Translator";
 
 type ButtonProps = React.ComponentProps<"button"> & {
   product: Product
@@ -29,7 +30,7 @@ export default function BtnCart({ product, ...restProps }: ButtonProps) {
       onClick={addProduct}
     >
       {(status.loading && status.product === product._id) ? <FaSpinner size={20} className="animate-spin" />
-        : <>add to <CiShoppingCart fontSize={"20px"} /></>}
+        : <><Translator arabic="اضف الي السله " english="add to " />  <CiShoppingCart fontSize={"20px"} className="ms-1" /></>}
     </button>
   );
 }

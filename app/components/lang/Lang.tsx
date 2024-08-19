@@ -13,14 +13,14 @@ export default function Lang() {
   //  handle Change Lang
   let handleLangClick = useCallback(() => {
     if (isArabic === false) {
-      document.body.dir = "rtl";
-      document.body.lang = "ar";
+      document.documentElement.dir = "rtl";
+      document.documentElement.lang = "ar";
 
       dispatch(setLangState(true));
     } else {
-      document.body.dir = "ltr";
+      document.documentElement.dir = "ltr";
       dispatch(setLangState(false));
-      document.body.lang = "en";
+      document.documentElement.lang = "en";
     }
   }, [dispatch, isArabic]);
 
@@ -30,8 +30,8 @@ export default function Lang() {
 
   useEffect(() => {
     if (isArabic) {
-      document.body.dir = "rtl";
-      document.body.lang = "ar";
+      document.documentElement.dir = "rtl";
+      document.documentElement.lang = "ar";
     }
   }, [isArabic]);
 
