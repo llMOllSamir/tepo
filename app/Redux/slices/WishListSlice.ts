@@ -73,7 +73,7 @@ export const userWishList = createSlice({
     emptyWishlist: (state) => {
       state.wishList = [];
       state.count = 0;
-    }
+    },
   },
   extraReducers: (builder) => {
     // Add to cart request
@@ -93,6 +93,6 @@ export const userWishList = createSlice({
     });
   },
 });
-export const {emptyWishlist} = userWishList.actions;
+export const { emptyWishlist } = userWishList.actions;
 
 export default userWishList.reducer;

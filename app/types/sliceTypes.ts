@@ -34,6 +34,8 @@ export type UserState = {
   token: string | null;
   user: User | null;
   address: UserAddress[];
+  status: "idle" | "pending" | "success" | "failed";
+  error: string | null;
 };
 
 // categories type

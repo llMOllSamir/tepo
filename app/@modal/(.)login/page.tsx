@@ -22,11 +22,14 @@ export default function Login() {
 
     // validation schema
     const schema = yup.object({
-        email: yup.string().email("Enter a valid email").required(),
-        password: yup.string().required(),
+        email: yup.string().email("Enter a valid email").required("Please enter your email"),
+        password: yup.string().required("Please enter your password").min(6, "Password must be at least 6 characters"),
     })
     //  react form handler 
-    const { formState, register, handleSubmit } = useForm({ resolver: yupResolver(schema) })
+    const { formState, register, handleSubmit } = useForm({
+        resolver: yupResolver(schema),
+        mode: "onChange"
+    })
     const { errors } = formState
 
     // fetching data Type response

@@ -6,9 +6,7 @@ import { yupResolver } from "@hookform/resolvers/yup"
 import * as yup from "yup"
 import axios from 'axios'
 import { FaSpinner } from "react-icons/fa";
-import { useAppDispatch } from '@/app/hooks/storeHooks'
 import { User } from '@/app/types/sliceTypes'
-import { setUser } from '@/app/Redux/slices/userSlice'
 import Modal from '@/app/components/Modal'
 
 
@@ -17,19 +15,21 @@ export default function Login() {
     const [isModalOpen, setModalOpen] = useState(true);
     const [fetching, setFetching] = useState(false)
     const [failedLogin, setFailedLogin] = useState(null)
-    const dispatch = useAppDispatch()
     const router = useRouter()
 
     // validation schema
     const schema = yup.object({
-        name: yup.string().required(),
-        email: yup.string().email("Enter a valid email").required(),
-        password: yup.string().required(),
-        rePassword: yup.string().required().oneOf([yup.ref('password')], 'Passwords must match'),
-        phone: yup.string().required().matches(/^(010|011|012|015)[0-9]{8}$/, "Phone Number must be Egyptian valid Number"),
+        name: yup.string().required("Please enter your name"),
+        email: yup.string().email("Enter a valid email").required("Please enter your email"),
+        password: yup.string().required("Please enter your password").min(6, "Password must be at least 6 characters"),
+        rePassword: yup.string().required("Please confirm your password").oneOf([yup.ref('password')], 'Passwords must match'),
+        phone: yup.string().required("Please enter your phone").matches(/^(010|011|012|015)[0-9]{8}$/, "Phone Number must be Egyptian valid Number"),
     })
     //  react form handler 
-    const { formState, register, handleSubmit } = useForm({ resolver: yupResolver(schema) })
+    const { formState, register, handleSubmit } = useForm({
+        resolver: yupResolver(schema),
+        mode: "onChange"
+    })
     const { errors } = formState
 
 
