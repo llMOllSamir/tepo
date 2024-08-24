@@ -32,7 +32,7 @@ export default function Modal({ children, isOpen, onClose }: props) {
         <div
             onClick={handleClose}
             className="z-30 fixed inset-0 bg-gray-300 bg-opacity-50   flex  justify-center items-center">
-            {children}\
+            {children}
         </div>
     )
 }

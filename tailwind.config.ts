@@ -12,6 +12,9 @@ const config: Config = {
       container: {
         center: true,
       },
+      screens: {
+        xs: "480px",
+      },
     },
   },
 

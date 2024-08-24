@@ -69,7 +69,12 @@ export const removeFromWishList = createAsyncThunk<
 export const userWishList = createSlice({
   name: "wishlist",
   initialState,
-  reducers: {},
+  reducers: {
+    emptyWishlist: (state) => {
+      state.wishList = [];
+      state.count = 0;
+    }
+  },
   extraReducers: (builder) => {
     // Add to cart request
     builder.addCase(addToWishList.fulfilled, (state, action) => {
@@ -88,6 +93,6 @@ export const userWishList = createSlice({
     });
   },
 });
-export const {} = userWishList.actions;
+export const {emptyWishlist} = userWishList.actions;
 
 export default userWishList.reducer;

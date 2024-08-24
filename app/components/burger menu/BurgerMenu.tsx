@@ -18,6 +18,7 @@ export default function BurgerMenu() {
     { en: "HOME", ar: "الرئيسيه", ref: "/" },
     { en: "PRODUCTS", ar: "المنتجات", ref: "/products" },
     { en: "OFFERS", ar: "العروض", ref: "/offers" },
+    { en: "Profile", ar: "الشخصيه", ref: "/profile" },
   ];
 
   // styling Icon
