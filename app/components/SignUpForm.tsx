@@ -4,7 +4,7 @@ import React, { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
 import { useAppDispatch, useAppSelector } from '../hooks/storeHooks'
-import { loginUser } from '../Redux/slices/userSlice'
+import { registerUser } from '../Redux/slices/userSlice'
 import { FaSpinner } from 'react-icons/fa6'
 import { useRouter } from 'next/navigation'
 export default function SignUpForm() {
@@ -33,7 +33,7 @@ export default function SignUpForm() {
     })
 
     const handleLogin = (data: UserData) => {
-        dispatch(loginUser(data))
+        dispatch(registerUser(data))
     }
 
     useEffect(() => {
