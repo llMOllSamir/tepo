@@ -1,7 +1,7 @@
 import { Product } from "@/app/types/productsTypes";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-import { CartState } from "../../types/sliceTypes";
+import { CartProduct, CartState } from "../../types/sliceTypes";
 
 const initialState: CartState = {
   cartList: [],
@@ -21,7 +21,7 @@ type CartResponse = {
   data: {
     _id: string;
     cartOwner: string;
-    products: Product[];
+    products: CartProduct[];
     totalCartPrice: number;
   };
 };
@@ -62,7 +62,7 @@ export const addToCart = createAsyncThunk<CartResponse, string>(
 export const removeFromCart = createAsyncThunk<CartResponse, string>(
   "cart/removeFromCart",
   async (productId) => {
-    const res = await axios.post<CartResponse>(
+    const res = await axios.delete<CartResponse>(
       "https://ecommerce.routemisr.com/api/v1/cart/" + productId,
       {
         headers: {
@@ -74,23 +74,23 @@ export const removeFromCart = createAsyncThunk<CartResponse, string>(
   }
 );
 
-export const updateCart = createAsyncThunk<CartResponse, number>(
-  "cart/updateCart",
-  async (count) => {
-    const res = await axios.put<CartResponse>(
-      "https://ecommerce.routemisr.com/api/v1/cart",
-      {
-        count,
+export const updateCart = createAsyncThunk<
+  CartResponse,
+  { count: number; productId: string }
+>("cart/updateCart", async ({ count, productId }) => {
+  const res = await axios.put<CartResponse>(
+    "https://ecommerce.routemisr.com/api/v1/cart/" + productId,
+    {
+      count,
+    },
+    {
+      headers: {
+        token: JSON.parse(localStorage.getItem("token") || ""),
       },
-      {
-        headers: {
-          token: JSON.parse(localStorage.getItem("token") || ""),
-        },
-      }
-    );
-    return res.data;
-  }
-);
+    }
+  );
+  return res.data;
+});
 
 export const clearCart = createAsyncThunk<{ message: string }>(
   "cart/clearCart",
@@ -163,11 +163,28 @@ export const userCart = createSlice({
       state.totalCartPrice = action.payload.data.totalCartPrice;
     });
     // Update cart request
-    builder.addCase(updateCart.fulfilled, (state, action) => {
-      state.numOfCartItems = action.payload.numOfCartItems;
-      state.cartList = action.payload.data.products;
-      state.totalCartPrice = action.payload.data.totalCartPrice;
-    });
+    builder
+      .addCase(updateCart.fulfilled, (state, action) => {
+        state.numOfCartItems = action.payload.numOfCartItems;
+        state.cartList = action.payload.data.products;
+        state.totalCartPrice = action.payload.data.totalCartPrice;
+        state.error = null;
+        state.status.loading = false;
+        state.status.status = "success";
+        state.status.product = null;
+      })
+      .addCase(updateCart.pending, (state, action) => {
+        state.error = null;
+        state.status.loading = true;
+        state.status.status = "pending";
+        state.status.product = action.meta.arg.productId;
+      })
+      .addCase(updateCart.rejected, (state, action) => {
+        state.error = action?.error?.message as string;
+        state.status.loading = false;
+        state.status.status = "failed";
+        state.status.product = null;
+      });
     // Clear cart request
     builder.addCase(clearCart.fulfilled, (state, action) => {
       state.numOfCartItems = null;
@@ -176,6 +193,6 @@ export const userCart = createSlice({
     });
   },
 });
-export const {emptyCart} = userCart.actions;
+export const { emptyCart } = userCart.actions;
 
 export default userCart.reducer;

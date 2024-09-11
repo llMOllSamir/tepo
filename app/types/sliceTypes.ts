@@ -1,14 +1,20 @@
 import { Category, Product } from "./productsTypes";
 
+export type CartProduct = {
+  count: number;
+  price: number;
+  _id: string;
+  product: Product;
+};
 // cart type
 export type CartState = {
-  cartList: any[];
+  cartList: CartProduct[];
   numOfCartItems: number | null;
   totalCartPrice: number;
   status: {
     loading: boolean;
     status: "idle" | "pending" | "success" | "failed";
-    product: any;
+    product: string | null;
   };
   error: any;
 };

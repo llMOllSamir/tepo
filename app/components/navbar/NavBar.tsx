@@ -29,12 +29,15 @@ export default function NavBar() {
 
 
   useEffect(() => {
-    const userToken = localStorage.getItem("token");
-    if (userToken) {
-      const user: User = JSON.parse(localStorage.getItem("user") || "") as User;
+    const userToken: string | null = localStorage.getItem("token");
+    const userInfo: string | null = localStorage.getItem("user");
+    if (userToken && userInfo) {
+      const user: User = JSON.parse(userInfo || "");
       dispatch(setUser({ token: userToken, user }));
-      dispatch(getUserAddress());
-      dispatch(getCart());
+    } else {
+      dispatch(setUser({ token: null, user: null }));
+      localStorage.removeItem("token");
+      localStorage.removeItem("user");
     }
     dispatch(getCategories());
   }, [dispatch]);
@@ -47,7 +50,6 @@ export default function NavBar() {
       dispatch(getWishList());
     }
   }, [token, dispatch])
-
 
   return (
     <nav
