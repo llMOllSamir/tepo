@@ -6,7 +6,7 @@ import cart from "./slices/cartSlice";
 import product from "./slices/productSlice";
 import lang from "./slices/langSlice";
 import WishList from "./slices/WishListSlice";
-
+import order from "./slices/orderSlice";
 export const store = configureStore({
   reducer: {
     product,
@@ -16,6 +16,7 @@ export const store = configureStore({
     cart,
     user,
     WishList,
+    order,
   },
 });
 export type RootState = ReturnType<typeof store.getState>;

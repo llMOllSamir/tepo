@@ -55,7 +55,7 @@ export default function HeadIcons() {
       {
         element: GoPerson,
         title: { ar: "الشخصيه", en: "Profile" },
-        ref: "/profile",
+        ref: "/user",
         counter: null,
       },]
     }

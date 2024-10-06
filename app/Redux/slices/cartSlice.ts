@@ -5,6 +5,7 @@ import { CartProduct, CartState } from "../../types/sliceTypes";
 
 const initialState: CartState = {
   cartList: [],
+  cartId: null,
   numOfCartItems: null,
   totalCartPrice: 0,
   status: {
@@ -18,6 +19,7 @@ const initialState: CartState = {
 type CartResponse = {
   status: string;
   numOfCartItems: number;
+  cartId: string;
   data: {
     _id: string;
     cartOwner: string;
@@ -92,8 +94,8 @@ export const updateCart = createAsyncThunk<
   return res.data;
 });
 
-export const clearCart = createAsyncThunk<{ message: string }>(
-  "cart/clearCart",
+export const emptyCart = createAsyncThunk<{ message: string }>(
+  "cart/emptyCart",
   async () => {
     const res = await axios.delete<{ message: string }>(
       "https://ecommerce.routemisr.com/api/v1/cart",
@@ -106,14 +108,13 @@ export const clearCart = createAsyncThunk<{ message: string }>(
     return res.data;
   }
 );
-
 export const userCart = createSlice({
   name: "cart",
   initialState,
   reducers: {
-    emptyCart: (state) => {
+    clearCart: (state) => {
       state.cartList = [];
-      state.numOfCartItems = null;
+      state.numOfCartItems = 0;
       state.totalCartPrice = 0;
     },
   },
@@ -151,6 +152,8 @@ export const userCart = createSlice({
         state.numOfCartItems = action.payload.numOfCartItems;
         state.cartList = action.payload.data.products;
         state.totalCartPrice = action.payload.data.totalCartPrice;
+        state.error = null;
+        state.cartId = action.payload.cartId;
       })
       .addCase(getCart.rejected, (state, action) => {
         state.numOfCartItems = null;
@@ -186,13 +189,13 @@ export const userCart = createSlice({
         state.status.product = null;
       });
     // Clear cart request
-    builder.addCase(clearCart.fulfilled, (state, action) => {
-      state.numOfCartItems = null;
+    builder.addCase(emptyCart.fulfilled, (state, action) => {
       state.cartList = [];
+      state.numOfCartItems = null;
       state.totalCartPrice = 0;
     });
   },
 });
-export const { emptyCart } = userCart.actions;
+export const { clearCart } = userCart.actions;
 
 export default userCart.reducer;

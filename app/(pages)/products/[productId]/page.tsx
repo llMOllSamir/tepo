@@ -83,7 +83,8 @@ export default async function ProductDetails({ params }: ProductDetailsProps) {
           <div className="flex mx-auto justify-center items-center text-red-600  ">
             <FaSpinner className='  animate-spin' size={"4rem"} />
           </div>}>
-          <RecommendedProducts subCategoryId={data.subcategory[0]._id} />
+          <div className='grid grid-cols-2 gap-5  sm:grid-cols-3  lg:grid-cols-4 xl:grid-cols-5'>
+            <RecommendedProducts subCategoryId={data.subcategory[0]._id} /></div>
         </Suspense>
       </div>
     </section>

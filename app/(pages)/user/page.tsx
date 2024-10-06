@@ -4,6 +4,6 @@ import React from 'react'
 
 export default function ProfileF() {
     return (
-        <div>page</div>
+        <div className='shadow-xl grow'>page</div>
     )
 }

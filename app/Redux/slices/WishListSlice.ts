@@ -76,17 +76,17 @@ export const userWishList = createSlice({
     },
   },
   extraReducers: (builder) => {
-    // Add to cart request
+    // Add to wishList request
     builder.addCase(addToWishList.fulfilled, (state, action) => {
       state.wishList = action.payload.data;
       state.count = action.payload.data.length;
     });
-    // Get cart request
+    // Get wishList request
     builder.addCase(getWishList.fulfilled, (state, action) => {
       state.wishList = action.payload.data.map((item) => item._id);
       state.count = action.payload.count;
     });
-    // Remove from cart request
+    // Remove from wishList request
     builder.addCase(removeFromWishList.fulfilled, (state, action) => {
       state.wishList = action.payload.data;
       state.count = action.payload.data.length;

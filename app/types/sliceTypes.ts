@@ -10,6 +10,7 @@ export type CartProduct = {
 export type CartState = {
   cartList: CartProduct[];
   numOfCartItems: number | null;
+  cartId: string | null;
   totalCartPrice: number;
   status: {
     loading: boolean;
@@ -51,4 +52,21 @@ export type CategoryState = {
 // product type
 export type ProductState = {
   productList: Product[];
+};
+
+// Order type
+export type OrderType = {
+  cartItems: [];
+  createdAt: string;
+  id: number;
+  isDelivered: boolean;
+  isPaid: boolean;
+  paymentMethodType: string;
+  shippingAddress: Omit<UserAddress, "_id">;
+  shippingPrice: number;
+  taxPrice: number;
+  totalOrderPrice: number;
+  updatedAt: string;
+  user: User;
+  _id: string;
 };
