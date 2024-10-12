@@ -28,7 +28,7 @@ export default function HeadIcons() {
     dispatch(emptyCart())
     dispatch(emptyWishlist())
     setShowModal(false)
-    router.replace("/")
+    router.replace("/auth/login")
   }
 
   const protectedIcons = useMemo(() => {

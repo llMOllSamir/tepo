@@ -24,6 +24,8 @@ export default function BtnCart({ product, ...restProps }: ButtonProps) {
     }
   };
 
+
+
   return (
     <button
       {...restProps}

@@ -64,8 +64,9 @@ export default function SignInForm() {
                 </button>
                     : <input type="submit" className=' flex  mx-auto bg-red-600 px-5 py-2 rounded-lg text-white font-bold cursor-pointer' value={"Login"} />
             }
+            <p className='text-center text-sm mt-5 dark:text-gray-200 font-bold'> Did you forget your password ? <span className='text-red-600 cursor-pointer' onClick={() => { router.push("/auth/forgot-password"); }}>Forget Password</span></p>
 
-            <p className='text-center text-sm mt-5 dark:text-gray-200 font-bold'> Don&apos;t have an account ? <span className='text-red-600 cursor-pointer' onClick={() => { router.push("/auth/signup"); }}>Register</span></p>
+            <p className='text-center text-sm mt-3 dark:text-gray-200 font-bold'> Don&apos;t have an account ? <span className='text-red-600 cursor-pointer' onClick={() => { router.push("/auth/signup"); }}>Register</span></p>
         </form >
     )
 }

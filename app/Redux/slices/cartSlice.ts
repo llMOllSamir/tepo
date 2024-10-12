@@ -1,4 +1,3 @@
-import { Product } from "@/app/types/productsTypes";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import { CartProduct, CartState } from "../../types/sliceTypes";
@@ -145,6 +144,7 @@ export const userCart = createSlice({
           product: null,
         };
         state.error = action?.error?.message as string;
+         alert("You Have To Login Again")
       });
     // Get cart request
     builder

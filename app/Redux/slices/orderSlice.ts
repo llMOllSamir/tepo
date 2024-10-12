@@ -60,7 +60,7 @@ export const cardOrder = createAsyncThunk(
   async ({ address, cartId }: OrderRequest) => {
     const res = await axios.post<CardOrderResponse>(
       "https://ecommerce.routemisr.com/api/v1/orders/checkout-session/" +
-        cartId,
+        cartId+"?url=https://tepo.vercel.app",
       address,
       {
         headers: {

@@ -26,7 +26,7 @@ export type WishListState = {
 };
 // user type
 export type User = {
-  name: string;
+   name: string;
   email: string;
   role: string;
 };
@@ -56,11 +56,12 @@ export type ProductState = {
 
 // Order type
 export type OrderType = {
-  cartItems: [];
+  cartItems: CartProduct[];
   createdAt: string;
   id: number;
   isDelivered: boolean;
   isPaid: boolean;
+  paidAt?: string;
   paymentMethodType: string;
   shippingAddress: Omit<UserAddress, "_id">;
   shippingPrice: number;

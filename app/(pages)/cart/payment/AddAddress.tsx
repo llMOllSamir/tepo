@@ -27,13 +27,13 @@ export default function AddAddress({ close }: { close: React.Dispatch<SetStateAc
     }
 
     return (
-        <form onSubmit={handleSubmit(addUserAddress)} className='flex flex-col gap-3 w-full'>
+        <form onSubmit={handleSubmit(addUserAddress)} className='flex flex-col gap-3 w-full   '>
             <div className="flex justify-start items-center gap-x-3 w-full">
                 <label htmlFor="name" className='w-14 '>Name :</label>
                 <input
                     type="text"
                     id="name"
-                    className='grow border px-2 border-gray-300 rounded'
+                    className='grow border px-2 border-gray-300 rounded bg-transparent'
                     placeholder="Name"
                     {...register("name")}
                 />
@@ -44,7 +44,7 @@ export default function AddAddress({ close }: { close: React.Dispatch<SetStateAc
                 <input
                     type="text"
                     id="details"
-                    className='grow border px-2 border-gray-300 rounded'
+                    className='grow border px-2 border-gray-300 rounded bg-transparent'
                     placeholder="Details"
                     {...register("details")}
                 />
@@ -55,7 +55,7 @@ export default function AddAddress({ close }: { close: React.Dispatch<SetStateAc
                 <input
                     type="tel"
                     id="phone"
-                    className='grow border px-2 border-gray-300 rounded'
+                    className='grow border px-2 border-gray-300 rounded bg-transparent'
                     placeholder="Phone Number Must be Egyptian valid Number"
                     {...register("phone")}
                 />
@@ -66,7 +66,7 @@ export default function AddAddress({ close }: { close: React.Dispatch<SetStateAc
                 <input
                     type="text"
                     id="city"
-                    className='grow border px-2 border-gray-300 rounded'
+                    className='grow border px-2 border-gray-300 rounded bg-transparent'
                     placeholder="City"
                     {...register("city")}
                 />
